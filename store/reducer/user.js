@@ -1,20 +1,23 @@
 const InitialState = {
-    name: 'Farrukh',
-    pass: 'abc123'
+    registerStatus: undefined
 }
 
 export default ( state = InitialState, action ) => {
     console.log("action==>", action.payload)
     switch (action.type) {
-        case 'INITIALIZEPRODUCT':
+        case 'SETREGISTERSTATUS':
             return ({
-                // ...state,
-                // allProduct: action.payload.adds,
-                // sliderAdds: action.payload.sliders,
-                // allSliderAdds: action.payload.sliderAdds,
-                // sliderAddsLength: action.payload.sliderAddsL,
+                ...state,
+                registerStatus: action.payload
             })
 
+        case 'SETSTATUS':
+            return ({
+                ...state,
+                registerStatus: undefined
+            })
+    
+            SETSTATUS
         default:
             break;
     }

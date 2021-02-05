@@ -8,11 +8,10 @@ import { Container, Header, Content, Form, Item, Input, Label } from 'native-bas
 import AppHeader from '../component/AppHeader'
 
 // import redux actions
-import {Loginfun} from '../../store/action/index'
+import {} from '../../store/action/index'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Login = (props) => {
-    props.Loginfun()
     return (
        <View style={styles.container}>
             
@@ -58,7 +57,7 @@ const mapStateToProps = (state) => ({
 })
     
 const mapDispatchToProps = (dispatch)=> ({
-    Loginfun: ()=> { dispatch(Loginfun()) },
+    // Loginfun: ()=> { dispatch(Loginfun()) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
