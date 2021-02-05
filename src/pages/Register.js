@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View, Text, StyleSheet, Image, } from 'react-native'
 import { connect } from 'react-redux';
 
-import { Container, Header, Content, Form, Item, Input, Label, Icon } from 'native-base';
+import { Content, Form, Item, Input, Label } from 'native-base';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 // import components
@@ -136,14 +136,14 @@ const Register = (props) => {
                                     {label: 'No', value: 'No'},
                                     
                                 ]}
-                                defaultValue={bloodP}
+                                defaultValue={diebetes}
                                 containerStyle={{height: 50, marginTop: 5}}
                                 style={{borderWidth: 0,backgroundColor: 'white', width: 300, alignSelf: 'center'}}
                                 itemStyle={{
                                     justifyContent: 'flex-start',
                                 }}
                                 dropDownStyle={{backgroundColor: 'white' ,width: 300, alignSelf: 'center', }}
-                                onChangeItem={item => setBloodP(item.value)}
+                                onChangeItem={item => setDiebetes(item.value)}
                             /> 
 
                             <Item floatingLabel
@@ -155,7 +155,10 @@ const Register = (props) => {
 
                             <TouchableOpacity 
                                 onPress={()=> {
-                                    props.navigation.navigate('Home')
+                                    props.navigation.reset({
+                                        index: 0,
+                                        routes: [{ name: 'Home' }],
+                                    });
                                 }}
                                 style={styles.l_btn}>
                                     <Text style={{marginTop: 2,alignSelf: 'center', fontWeight: 'bold',fontSize: 20, color: 'white'}}>
@@ -190,14 +193,6 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         // height: 290,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-            elevation: 1,
     },
     l_btn: {
         alignSelf: 'center',

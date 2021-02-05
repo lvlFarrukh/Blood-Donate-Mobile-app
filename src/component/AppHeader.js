@@ -17,7 +17,8 @@ export default AppHeader
 const styles = StyleSheet.create({
     topStartup: {
         height: 150,
-        marginBottom: 10
+        marginBottom: 10,
+        
     },
     topImg: {
         height: 130,
