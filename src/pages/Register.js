@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {View, Text, StyleSheet, Image, } from 'react-native'
 import { connect } from 'react-redux';
 
-import { Content, Form, Item, Input, Label } from 'native-base';
+import { Content, Form, Item, Input, Label, Spinner } from 'native-base';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 // import components
@@ -25,6 +25,8 @@ const Register = (props) => {
     const [town, setTown] = useState(undefined)
     const [number, setNumber] = useState(undefined)
     const [disease, setDisease] = useState(undefined)
+
+    const [spBtn, setspbtn] = useState(0)
 
     // console.log(props.user.registerStatus)
 
@@ -52,6 +54,7 @@ const Register = (props) => {
         number !== undefined &
         bloodG !== undefined &
         bloodP !== undefined &
+        password !== undefined &
         diebetes !== undefined &&
         dataObj.push(setData())
 
@@ -60,8 +63,10 @@ const Register = (props) => {
     }
 
     useEffect( () => {
-        if (props.user.registerStatus === 1) 
+        if (props.user.registerStatus === 1) {
+            setspbtn(0)
             alert('User already exist')
+        }
         else if(props.user.registerStatus === 0){
             let dataObj = []
             dataObj.push(setData())
@@ -230,18 +235,31 @@ const Register = (props) => {
                             style={{width: 290, alignSelf: 'center'}}
                         >
                             <Label>Any other Disease</Label>
-                            <Input />
+                            <Input 
+                                onChangeText={(text) =>{
+                                    setDisease(text)
+                                }}
+                            />
                         </Item>
 
-                        <TouchableOpacity 
-                            onPress={()=> {
-                                Register()
-                            }}
-                            style={styles.l_btn}>
-                                <Text style={{marginTop: 2,alignSelf: 'center', fontWeight: 'bold',fontSize: 20, color: 'white'}}>
-                                    Register
-                                </Text>
-                        </TouchableOpacity>
+                        {spBtn === 0 && 
+                            <TouchableOpacity 
+                                onPress={()=> {
+                                    setspbtn(1)
+                                    Register()
+                                }}
+                                style={styles.l_btn}>
+                                    <Text style={{marginTop: 2,alignSelf: 'center', fontWeight: 'bold',fontSize: 20, color: 'white'}}>
+                                        Register
+                                    </Text>
+                            </TouchableOpacity>
+                        }       
+
+                        {spBtn === 1 &&
+                            <Spinner color='gray' />
+                        }
+                        
+                        
                     </Form>
                 </View>
             </View>

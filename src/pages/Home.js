@@ -1,21 +1,38 @@
 import React, {useEffect} from 'react'
 // import {BackHandler} from 'react-native'
-import {H5, H2,Card, CardItem, Icon, Right, Body, Title, Container, Header, Content, Footer, FooterTab, Button, Text } from 'native-base';
+import {H3, H2,Card, CardItem, Icon, Right, Body, Title, Container, Header, Content, Footer, FooterTab, Button, Text } from 'native-base';
+import { connect } from 'react-redux';
+
 
 import MainFooter from '../component/MainFooter'
 import MainHeader from '../component/MainHeader'
 
 const Home = (props) => {
+  
+    // console.log(props.user.user[0]['fullname'].split(' ')[0])
+
     return (
         <Container>
         
         <MainHeader  title={'Home'} mainIcon={'home'} />
 
-        <Card>
+        <Card style={{width: 330, alignSelf: 'center', marginTop: 15}}>
             <CardItem>
               <Body>
-                <Text style={{fontSize: 15, marginBottom: 5}}>User id: 0149</Text>
-                <H2>Hello, Farrukh</H2>
+                <Text style={{fontSize: 15, marginBottom: 5}}>Blood Group: {props.user.user && props.user.user[0]['bloodgroup']}</Text>
+                <H2 style={{fontWeight:'bold'}}>Hello, {props.user.user && props.user.user[0]['fullname'].split(' ')[0]}</H2>
+              </Body>
+            </CardItem>
+        </Card>
+
+        <Card style={{width: 330, alignSelf: 'center', marginTop: 15}}>
+            <CardItem>
+              <Body>
+                <H2 style={{marginBottom: 5, color: 'green', fontWeight: 'bold'}}>Latest Donation</H2>
+                <H3 style={{marginBottom: 5, color: 'green'}}>Recever Data:</H3>
+                <Text>Name: </Text>
+                <Text>Blood Group: </Text>
+                <Text>Date: </Text>
               </Body>
             </CardItem>
         </Card>
@@ -28,4 +45,12 @@ const Home = (props) => {
     )
 }
 
-export default Home
+const mapStateToProps = (state) => ({ 
+  user: state.user
+})
+  
+const mapDispatchToProps = (dispatch)=> ({
+  checkCrediantial: (data)=> { dispatch(checkCrediantial(data)) },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Footer, FooterTab, Button, Text } from 'native-base';
+// import FontAwesome from 'react-native-fontawesome';
 
 
 const MainFooter = ({navigate}) => {

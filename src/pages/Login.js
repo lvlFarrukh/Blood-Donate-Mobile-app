@@ -1,17 +1,49 @@
-import React from 'react'
-import {View, Text, StyleSheet, Image} from 'react-native'
+import React, {useState, useEffect} from 'react'
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux';
 
-import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
+import { Form, Item, Input, Label, Spinner } from 'native-base';
 
 // import components
 import AppHeader from '../component/AppHeader'
 
 // import redux actions
-import {} from '../../store/action/index'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {checkCrediantial} from '../../store/action/index'
 
 const Login = (props) => {
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+    const [spBtn, setspBtn] = useState(0)
+
+    const login = ()=> {
+        if (email !== undefined & password !== undefined){
+            let data = {email: email.toLowerCase(), password: password}
+            props.checkCrediantial(data)
+        }
+        else
+            alert('Enter email or password')
+    }
+
+    useEffect(() => {
+        if (props.user.loginStatus === 1) {
+            setspBtn(0)
+            alert('Wrong PAssword')
+        }
+        else if (props.user.loginStatus === 2) {
+            setspBtn(0)
+            alert('User does not exit')
+        }
+        else if (props.user.loginStatus === 3){
+            alert('Login Successfully!')
+            props.navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            });
+        }
+            
+    }, [props.user])
+
     return (
        <View style={styles.container}>
             
@@ -23,28 +55,52 @@ const Login = (props) => {
                         <Item floatingLabel
                             style={{width: 290}}
                         >
-                            <Label>Username</Label>
-                            <Input />
+                            <Label>Email</Label>
+                            <Input 
+                                onChangeText={(text)=> {
+                                    setEmail(text)
+                                }}
+                                keyboardType={'email-address'}
+                            />
                         </Item>
                         <Item floatingLabel
                             style={{width: 290}}
                         >
                             <Label>Password</Label>
-                            <Input />
+                            <Input 
+                                onChangeText={(text)=> {
+                                    setPassword(text)
+                                }}
+                                secureTextEntry={true}
+                            />
                         </Item>
 
-                        <TouchableOpacity style={styles.l_btn}>
-                            <Text style={{marginTop: 2,alignSelf: 'center', fontWeight: 'bold',fontSize: 20, color: 'white'}}>
-                                Login
-                            </Text>
-                        </TouchableOpacity>
+                        {spBtn === 0 && 
+                            <TouchableOpacity 
+                                onPress={()=>{
+                                    setspBtn(1)
+                                    login()
+                                }}
+                                style={styles.l_btn}>
+                                <Text style={{marginTop: 2,alignSelf: 'center', fontWeight: 'bold',fontSize: 20, color: 'white'}}>
+                                    Login
+                                </Text>
+                            </TouchableOpacity>
+                        }
+
+                        {spBtn === 1 &&
+                            <Spinner color='gray' />
+                        }
+
                     </Form>
                 {/* </Content> */}
 
                 <Text style={{fontSize: 16,alignSelf: 'center'}}>
                     If you are new, <Text 
                         style={{fontWeight: 'bold', color: 'darkred'}}
-                        onPress={()=>{props.navigation.navigate('Register')}}
+                        onPress={()=>{
+                            props.navigation.navigate('Register')
+                        }}
                     >Register</Text> Here!
                 </Text>
            </View>
@@ -57,7 +113,7 @@ const mapStateToProps = (state) => ({
 })
     
 const mapDispatchToProps = (dispatch)=> ({
-    // Loginfun: ()=> { dispatch(Loginfun()) },
+    checkCrediantial: (data)=> { dispatch(checkCrediantial(data)) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

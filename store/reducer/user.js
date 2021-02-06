@@ -1,5 +1,7 @@
 const InitialState = {
-    registerStatus: undefined
+    registerStatus: undefined,
+    loginStatus: 0, 
+    user: undefined
 }
 
 export default ( state = InitialState, action ) => {
@@ -16,8 +18,15 @@ export default ( state = InitialState, action ) => {
                 ...state,
                 registerStatus: undefined
             })
+
+        case 'LOGINSTATUS':
+            return ({
+                ...state,
+                loginStatus: action.payload.status,
+                user: action.payload.userData
+            })
     
-            SETSTATUS
+            
         default:
             break;
     }
