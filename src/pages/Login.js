@@ -35,7 +35,7 @@ const Login = (props) => {
             alert('User does not exit')
         }
         else if (props.user.loginStatus === 3){
-            alert('Login Successfully!')
+            // alert('Login Successfully!')
             props.navigation.reset({
                 index: 0,
                 routes: [{ name: 'Home' }],

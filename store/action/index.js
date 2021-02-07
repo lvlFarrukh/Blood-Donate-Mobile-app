@@ -46,8 +46,85 @@ const register = (data)=> {
     }
 }
 
+const getDoner = (bg) =>{
+    let filterDoners = []
+    let doners = []
+    return (dispatch)=> {
+        database().ref('users').on('value', async snapshot =>{
+            await doners.push(snapshot.val())
+
+                if (bg === 'A+') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'A+' && filterDoners.push(value)
+                        value.bloodgroup === 'A-' && filterDoners.push(value)
+                        value.bloodgroup === 'O+' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                
+                }
+                else if (bg === 'A-') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'A-' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'B+') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'B+' && filterDoners.push(value)
+                        value.bloodgroup === 'B-' && filterDoners.push(value)
+                        value.bloodgroup === 'O+' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'B-') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'B+' && filterDoners.push(value)
+                        value.bloodgroup === 'B-' && filterDoners.push(value)
+                        value.bloodgroup === 'O+' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'AB+') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'AB-') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'AB-' && filterDoners.push(value)
+                        value.bloodgroup === 'A-' && filterDoners.push(value)
+                        value.bloodgroup === 'B-' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'O+') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'O+' && filterDoners.push(value)
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+                else if (bg === 'O-') {
+                    for (const [key, value] of Object.entries(doners[0])) {
+                        value.bloodgroup === 'O-' && filterDoners.push(value)
+                    }
+                    dispatch({type: "SETDONERS", payload: filterDoners})
+                }
+            // },3000)
+            
+        })        
+    }
+}
+
 export {
     authenticate,
     register,
-    checkCrediantial
+    checkCrediantial,
+    getDoner
 }

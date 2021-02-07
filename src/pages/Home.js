@@ -9,8 +9,6 @@ import MainHeader from '../component/MainHeader'
 
 const Home = (props) => {
   
-    // console.log(props.user.user[0]['fullname'].split(' ')[0])
-
     return (
         <Container>
         

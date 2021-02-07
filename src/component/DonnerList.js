@@ -2,7 +2,7 @@ import React from 'react'
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
 
 
-const DonnerList = () => {
+const DonnerList = ({data}) => {
     return (
         
         <ListItem thumbnail>
@@ -10,8 +10,9 @@ const DonnerList = () => {
                 <Thumbnail style={{borderWidth: 2}} square source={require('../../media/user.png')} />
             </Left>
             <Body>
-                <Text>Sankhadeep</Text>
-                <Text note numberOfLines={1}>Its time to build a difference . .</Text>
+                <Text>{data.fullname}</Text>
+                <Text note numberOfLines={1}>Blood Group: {data.bloodgroup}</Text>
+                <Text note numberOfLines={1}>Contact No: {data.number}</Text>
             </Body>
             <Right>
                 <Button transparent>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, StyleSheet, Image, } from 'react-native'
+import {View, Text, StyleSheet, } from 'react-native'
 import { connect } from 'react-redux';
 
 import { Content, Form, Item, Input, Label, Spinner } from 'native-base';

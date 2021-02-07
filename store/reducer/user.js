@@ -5,7 +5,7 @@ const InitialState = {
 }
 
 export default ( state = InitialState, action ) => {
-    console.log("action==>", action.payload)
+    // console.log("action==>", action.payload)
     switch (action.type) {
         case 'SETREGISTERSTATUS':
             return ({

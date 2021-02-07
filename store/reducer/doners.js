@@ -1,17 +1,14 @@
 const InitialState = {
-    name: 'Farrukh',
+    doners: undefined
 }
 
 export default ( state = InitialState, action ) => {
     // console.log("action==>", action.payload)
     switch (action.type) {
-        case 'INITIALIZEPRODUCT':
+        case 'SETDONERS':
             return ({
-                // ...state,
-                // allProduct: action.payload.adds,
-                // sliderAdds: action.payload.sliders,
-                // allSliderAdds: action.payload.sliderAdds,
-                // sliderAddsLength: action.payload.sliderAddsL,
+                ...state,
+                doners: action.payload
             })
 
         default:
